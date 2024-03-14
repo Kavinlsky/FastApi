@@ -34,6 +34,8 @@ async def register(request: Request, companyname: str = Form(...), address: str 
     except:
         pass
 
+
+
     #         total_row = db.query(models.User).filter(models.User.email == email).first()
     #         print(total_row)
     #         if total_row == None:
