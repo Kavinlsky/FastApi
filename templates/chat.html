@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenAI Chat</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">OpenAI Chat</div>
+                    <div class="card-body">
+                        <div id="chat-container">
+                            <div id="chat-history"></div>
+                            <div id="user-input">
+                                <input type="text" class="form-control mb-2" id="user-message" placeholder="Type your message...">
+                                <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OpenAI JavaScript SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@openai/chat-dapter@0.4.0"></script>
+
+    <script>
+        async function sendMessage() {
+            const userInput = document.getElementById("user-message").value;
+            if (userInput.trim() === "") return;
+
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            const data = await response.json();
+            appendMessage(userInput, 'user');
+            appendMessage(data.response, 'server');
+
+            document.getElementById("user-message").value = "";
+        }
+
+        function appendMessage(message, sender) {
+            const chatHistory = document.getElementById("chat-history");
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add(sender + '-message');
+            messageDiv.innerText = message;
+            chatHistory.appendChild(messageDiv);
+        }
+    </script>
+</body>
+</html>
