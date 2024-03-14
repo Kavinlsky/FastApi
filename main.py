@@ -65,11 +65,12 @@ async def login(request : Request):
 @app.post("/login_authenticate")
 async def authenticate(request: Request, companyname: str = Form(...), password: str = Form(...)):
     user = collection.find_one({"company": companyname, "password": password})
+
     if user is None:
         message=f'Invalid Credentials'
         return templates.TemplateResponse('login.html', {"request": request, "message": message})
 
-    return templates.TemplateResponse('chat.html', {"request": request})
+    return templates.TemplateResponse('chat.html',{"request": request, "company": companyname})
 
 
 def response_from_gemini(question):
@@ -101,4 +102,7 @@ def response_from_openai(question):
 async def chat_with_bot(message: Message):
     # result= response_from_openai(message.message)
     result= response_from_gemini(message.message)
+
+
+
     return {"response":result}
