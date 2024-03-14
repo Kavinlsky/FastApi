@@ -23,18 +23,16 @@ async def home(request : Request):
 
 
 @app.post("/register/")
-async def register(request: Request, username: str = Form(...), email: str = Form(...), password: str = Form(...)):
-                   # db: Session = Depends(get_db)):
-    # form = UserCreateForm(request)
-    # await form.load_data()
-    # print("submited")
-    # if await form.is_valid():
-        try:
-            print(username)
-            print(email)
-            print(password)
-        except:
-            pass
+async def register(request: Request, companyname: str = Form(...), address: str = Form(...), pan: str = Form(...), aadhar: str = Form(...)):
+
+    try:
+        print(companyname)
+        print(address)
+        print(pan)
+        print(aadhar)
+        return templates.TemplateResponse("index.html", {"request": request, "errors": companyname})
+    except:
+        pass
 
     #         total_row = db.query(models.User).filter(models.User.email == email).first()
     #         print(total_row)
