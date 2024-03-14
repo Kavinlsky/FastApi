@@ -3,3 +3,4 @@ pymango
 Jinja2
 uvicorn
 openai
+google-generativeai

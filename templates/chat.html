@@ -2,16 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>OpenAI Chat</title>
+    <title>Chat</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <style>
+        /* Add custom styles for user and server messages */
+        .user-message {
+            background-color: #f1f1f1;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            word-wrap: break-word;
+        }
+        .server-message {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            word-wrap: break-word;
+        }
+        /* Styling for the chat container */
+        #chat-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">OpenAI Chat</div>
+                    <div class="card-header">Chat</div>
                     <div class="card-body">
                         <div id="chat-container">
                             <div id="chat-history"></div>
@@ -27,6 +50,7 @@
     </div>
 
     <!-- OpenAI JavaScript SDK -->
+
     <script src="https://cdn.jsdelivr.net/npm/@openai/chat-dapter@0.4.0"></script>
 
     <script>
