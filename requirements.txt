@@ -1,2 +1,4 @@
 fastapi
 pymango
+Jinja2
+uvicorn
