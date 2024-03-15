@@ -16,4 +16,10 @@ In this FastAPI project, I will use the MongoDB for database operation. If you w
 
 
 
+
+
+
+
+
+
 Note -  I don't have a Open AI API Key Access, Alternatively I can use the Gemini AI for  generating responses.
