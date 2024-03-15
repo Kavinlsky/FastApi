@@ -17,16 +17,6 @@
     <center>
     <h1>Edit Profile {{company_profile.company}}</h1>
     </center>
-    <!-- <form id="profileForm">
-        <ul>
-            <li>Company: <input type="text" id="company" value="{{ company_profile.company }}"></li>
-            <li>Address: <input type="text" id="address" value="{{ company_profile.address }}"></li>
-            <li>PAN: <input type="text" id="pan" value="{{ company_profile.pan }}"></li>
-            <li>Aadhar: <input type="text" id="aadhar" value="{{ company_profile.aadhar }}"></li>
-            <li>Password: <input type="text" id="password" value="{{ company_profile.password }}"></li>
-        </ul>
-        <button type="button" onclick="updateProfile()">Update</button>
-    </form> -->
 
     <div class="row my-5">
         <form action="/update" method="post">
@@ -58,14 +48,11 @@
               <button type="button" class="btn btn-primary" onclick="updateProfile()">Update</button>
               <button type="button" class="btn btn-primary" onclick="deleteProfile()">Delete Profile</button>
               <a href="/login" class="btn btn-primary">Logout</a>
-             
-
-
+         
         </form>
     </div>
 
         
-
         <style>
             ul {
                 list-style-type: none;
@@ -86,7 +73,6 @@
             }
         </style>
 
-
     <script>
         function updateProfile() {
             var company = document.getElementById("company").value;
@@ -94,7 +80,6 @@
             var pan = document.getElementById("pan").value;
             var aadhar = document.getElementById("aadhar").value;
             var password = document.getElementById("password").value;
-
             
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/update_profile", true);
@@ -136,7 +121,6 @@
             };
             var data = JSON.stringify({ company: company });
             xhr.send(data); 
-
         }
 
     </script>

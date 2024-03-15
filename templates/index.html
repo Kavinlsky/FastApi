@@ -16,7 +16,7 @@
     </div>
 
     <div class="row my-5">
-        <form action = "/register" method = "post">
+        <form id="registrationForm" action="/register" method = "post">
         <div class="mb-3">
           <label>Company Name</label>
           <input type="text" required class="form-control" name="companyname" value="" placeholder="Company name">
@@ -39,7 +39,7 @@
           <input type="password" required placeholder="Type a Password" value="" name="password" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="button" onclick="validateForm()" class="btn btn-primary">Register</button>
 
             <a href="/login" class="btn btn-primary">Login</a>
       </form>
@@ -64,5 +64,40 @@
         border-color: #0056b3;
     }
 </style>
+
+
+
+<script>
+  function validateForm() {
+      var companyName = document.forms["registrationForm"]["companyname"].value;
+      var address = document.forms["registrationForm"]["address"].value;
+      var pan = document.forms["registrationForm"]["pan"].value;
+      var aadhar = document.forms["registrationForm"]["aadhar"].value;
+      var password = document.forms["registrationForm"]["password"].value;
+
+      if (companyName === "" || address === "" || pan === "" || aadhar === "" || password === "") {
+          alert("All fields must be filled out");
+          return false;
+      }
+      if (!/^\d{12}$/.test(aadhar)) {
+            alert("Aadhar number should be 12 digits long");
+            return false;
+      }
+
+        
+      if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan)) {
+            alert("PAN number should have 10 characters (5 uppercase letters followed by 4 digits and 1 uppercase letter)");
+            return false;
+      }
+
+      if (!/(?=.*\d)(?=.*[a-zA-Z])/.test(password)) {
+            alert("Password should contain at least one digit and one character");
+            return false;
+      }
+
+      document.getElementById("registrationForm").submit();
+  }
+</script>
+
 
 {% endblock content %}

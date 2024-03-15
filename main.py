@@ -200,3 +200,4 @@ async def clear_chat(request: CompanyRequest):
         return {"message": f"Chat history for {company_name} cleared successfully"}
     else:
         raise HTTPException(status_code=404, detail=f"No chat history found for {company_name}")
+
