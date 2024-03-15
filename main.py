@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Request, Depends, Form, status, HTTPException
+from fastapi import FastAPI, Request, Depends, Form, status, HTTPException,Response
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from openai import OpenAI
 import google.generativeai as genai
 import os
 import pymongo
+# from fastapi.session import Session
 
 
 mongo_host = "localhost"
@@ -27,7 +28,11 @@ client=OpenAI(api_key='OPENAI-API-KEY')
 
 class Message(BaseModel):
     message: str
+    company: str
 
+
+def get_session(request: Request):
+    return request.session
 
 @app.get("/")
 async def home(request : Request):
@@ -100,9 +105,17 @@ def response_from_openai(question):
 
 @app.post("/api/chat")
 async def chat_with_bot(message: Message):
-    # result= response_from_openai(message.message)
-    result= response_from_gemini(message.message)
+    company_name=message.company
+    message=message.message
 
-
+    # result= response_from_openai(message)
+    result=response_from_gemini(message)
+    chat_collection = database["chats"]
+    document = {
+        "company": company_name,
+        "question": message,
+        "result":result
+    }
+    chat_collection.insert_one(document)
 
     return {"response":result}
